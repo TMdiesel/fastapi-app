@@ -73,3 +73,11 @@ async def delete_rooms(room_id: int, db: Session = Depends(get_db)):
 @app.delete("/bookings/{booking_id}", response_model=schemas.Booking)
 async def delete_bookings(booking_id: int, db: Session = Depends(get_db)):
     return crud.delete_booking(db=db, booking_id=booking_id)
+
+
+# update
+@app.put("/users/{user_id}", response_model=schemas.UserUpdate)
+async def update_users(
+    user_id: int, user: schemas.UserUpdate, db: Session = Depends(get_db)
+):
+    return crud.update_user(db=db, user_id=user_id, user=user)

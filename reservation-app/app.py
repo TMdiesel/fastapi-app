@@ -45,6 +45,18 @@ if page == "users":
         if res.status_code == 500:
             st.success("ユーザー削除完了")
 
+    st.write("### ユーザー更新")
+    with st.form(key="user_update"):
+        user_id = st.selectbox("user_id", users_dict.values())
+        username = st.text_input("username", max_chars=12)
+        submit_button_update = st.form_submit_button(label="request")
+    if submit_button_update:
+        url = f"http://127.0.0.1:8000/users/{user_id}"
+        data = {"username": username}
+        res = requests.put(url, data=json.dumps(data))
+        if res.status_code == 200:
+            st.success("ユーザー更新完了")
+
 
 if page == "rooms":
     st.title("会議室")

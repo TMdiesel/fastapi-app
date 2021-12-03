@@ -75,3 +75,10 @@ def delete_booking(db: Session, booking_id: int):
     db.commit()
     db.refresh(db_booking)
     return db_booking
+
+
+# ユーザー更新
+def update_user(db: Session, user_id: int, user: schemas.UserUpdate):
+    db.query(models.User).filter(models.User.user_id == user_id).update(user.dict())
+    db.commit()
+    return user

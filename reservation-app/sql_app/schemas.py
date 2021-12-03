@@ -21,6 +21,10 @@ class UserCreate(BaseModel):
     username: str = Field(max_length=12)
 
 
+class UserUpdate(UserCreate):
+    pass
+
+
 class User(UserCreate):
     user_id: int
 
