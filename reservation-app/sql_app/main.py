@@ -57,3 +57,19 @@ async def create_bookings(
     booking: schemas.BookingCreate, db: Session = Depends(get_db)
 ):
     return crud.create_booking(db=db, booking=booking)
+
+
+# delete
+@app.delete("/users/{user_id}", response_model=schemas.User)
+async def delete_users(user_id: int, db: Session = Depends(get_db)):
+    return crud.delete_user(db=db, user_id=user_id)
+
+
+@app.delete("/rooms/{room_id}", response_model=schemas.Room)
+async def delete_rooms(room_id: int, db: Session = Depends(get_db)):
+    return crud.delete_room(db=db, room_id=room_id)
+
+
+@app.delete("/bookings/{booking_id}", response_model=schemas.Booking)
+async def delete_bookings(booking_id: int, db: Session = Depends(get_db)):
+    return crud.delete_booking(db=db, booking_id=booking_id)
