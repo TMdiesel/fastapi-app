@@ -14,8 +14,8 @@ React, FastAPI を用いた web アプリです。
 
 ## 実行環境
 
-下記コマンドで必要なパッケージをインストールします。
+下記コマンドで必要な Python パッケージをインストールします。
 
 ```bash
-npm install
+poetry install
 ```
