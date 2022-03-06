@@ -6,6 +6,6 @@ from sqlalchemy.orm import Session
 app = FastAPI()
 
 
-@app.get("/")
-async def index():
+@app.get("/hello")
+async def hello():
     return {"message": "Hello World"}
