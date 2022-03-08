@@ -1,5 +1,6 @@
 import axios from "../axios";
 import { useState, useEffect } from "react";
+import "./Row.scss";
 
 type Props = {
   title: string;
