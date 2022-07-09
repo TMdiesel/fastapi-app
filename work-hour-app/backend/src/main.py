@@ -5,11 +5,21 @@ from sqlalchemy.orm import Session
 
 import schemas, models, crud
 from database import engine, SessionLocal
+from fastapi.middleware.cors import CORSMiddleware
 
 # テーブルを作成
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_db():
