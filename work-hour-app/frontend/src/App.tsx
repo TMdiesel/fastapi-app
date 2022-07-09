@@ -1,18 +1,15 @@
-import React from "react";
 import "./App.css";
-import { readWork } from "./fetcher";
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import "bulma/css/bulma.css";
+import { Home } from "./components/Home";
+import { Data } from "./components/Data";
+import { Visualization } from "./components/Visualization";
 
 function App() {
-  //readWork().then((responses) =>
-  //  console.log(responses.map((response) => console.log(response)))
-  //);
-
   return (
     <div className="App">
       <BrowserRouter>
-        <nav className="navbar is-success is-fixed-top">
+        <nav className="navbar is-success">
           <div className="navbar-menu">
             <div className="navbar-start">
               <NavLink to="/" className="navbar-item is-size-4">
@@ -28,9 +25,9 @@ function App() {
           </div>
         </nav>
         <Routes>
-          <Route path={`/`} element={<div>home</div>} />
-          <Route path={`/data`} element={<div>data</div>} />
-          <Route path={`/vis`} element={<div>vis</div>} />
+          <Route path={`/`} element={<Home></Home>} />
+          <Route path={`/data`} element={<Data></Data>} />
+          <Route path={`/vis`} element={<Visualization></Visualization>} />
         </Routes>
       </BrowserRouter>
     </div>
