@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <nav className="navbar is-success">
+        <nav className="navbar is-info">
           <div className="navbar-menu">
             <div className="navbar-start">
               <NavLink to="/" className="navbar-item is-size-4">

@@ -1,11 +1,11 @@
-import { readWork } from "../fetcher";
+import { readWorks, deleteWork } from "../apis";
 import { useState, useEffect } from "react";
 import { Work } from "../openapi";
 
 export const Data = () => {
   const [works, setWorks] = useState<Work[]>([]);
   useEffect(() => {
-    readWork().then((responses) => setWorks(responses));
+    readWorks().then((responses) => setWorks(responses));
   }, []);
 
   const toDateString = (datetime: Date): string => {
@@ -20,6 +20,11 @@ export const Data = () => {
     const minute = ("0" + datetime.getMinutes()).slice(-2);
     return `${hour}:${minute}`;
   };
+  const onClickDelete = (workId: number) => {
+    deleteWork(workId).then(() =>
+      readWorks().then((responses) => setWorks(responses))
+    );
+  };
 
   return (
     <div>
@@ -32,18 +37,33 @@ export const Data = () => {
             <th>作業時間</th>
             <th>項目</th>
             <th>メモ</th>
+            <th>更新</th>
+            <th>削除</th>
           </tr>
         </thead>
         <tbody>
           {works.map((work) => {
             return (
               <tr key={work.workId}>
-                <th>{toDateString(work.startDatetime)}</th>
-                <th>{toTimeString(work.startDatetime)}</th>
-                <th>{toTimeString(work.endDatetime)}</th>
-                <th>{work.duration}</th>
-                <th>{work.item}</th>
-                <th>{work.memo}</th>
+                <td>{toDateString(work.startDatetime)}</td>
+                <td>{toTimeString(work.startDatetime)}</td>
+                <td>{toTimeString(work.endDatetime)}</td>
+                <td>{work.duration}</td>
+                <td>{work.item}</td>
+                <td>{work.memo}</td>
+                <td>
+                  <button className="button is-success is-hoverrd is-small">
+                    更新
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => onClickDelete(work.workId)}
+                    className="button is-danger is-hoverrd is-small"
+                  >
+                    削除
+                  </button>
+                </td>
               </tr>
             );
           })}
