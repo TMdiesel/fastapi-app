@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createWork } from "../apis";
 
 export const Home = () => {
-  const [item, setItem] = useState<string>("");
+  const [item, setItem] = useState<string>("item1");
 
   const getTime = (): string => {
     const now = new Date();
@@ -17,13 +17,14 @@ export const Home = () => {
   };
 
   const handleItemChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
     setItem(event.target.value);
   };
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
+    if (!item) return;
     createWork({
       item: item,
       isActive: true,
@@ -34,10 +35,28 @@ export const Home = () => {
   return (
     <div>
       <div className="is-size-1 has-text-centered">{getTime()}</div>
-      <input type="text" value={item} onChange={handleItemChange}></input>
-      <button className="button is-info is-hoverrd" onClick={handleSubmit}>
-        開始
-      </button>
+      <div className="columns is-centerd">
+        <select
+          className="select"
+          onChange={handleItemChange}
+          style={{ width: "33%" }}
+        >
+          <option value="item1">item1</option>
+          <option value="item2">item2</option>
+        </select>
+        {/*
+        <input
+          className="input"
+          style={{ width: "33%" }}
+          type="text"
+          value={item}
+          onChange={handleItemChange}
+        ></input>
+        */}
+        <button className="button is-info is-hoverrd" onClick={handleSubmit}>
+          開始
+        </button>
+      </div>
     </div>
   );
 };
