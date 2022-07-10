@@ -12,13 +12,13 @@ function App() {
         <nav className="navbar is-info">
           <div className="navbar-menu">
             <div className="navbar-start">
-              <NavLink to="/" className="navbar-item is-size-4">
+              <NavLink to="/" className="navbar-item is-size-5">
                 開始
               </NavLink>
-              <NavLink to="/data" className="navbar-item is-size-4 ">
+              <NavLink to="/data" className="navbar-item is-size-5">
                 データ一覧
               </NavLink>
-              <NavLink to="/vis" className="navbar-item is-size-4">
+              <NavLink to="/vis" className="navbar-item is-size-5">
                 可視化
               </NavLink>
             </div>

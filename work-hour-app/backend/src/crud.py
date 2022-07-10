@@ -9,11 +9,7 @@ def read_works(db: Session, skip: int = 0, limit: int = 100):
 
 def create_work(db: Session, work: schemas.WorkCreate):
     db_work = models.Work(
-        item=work.item,
-        memo=work.memo,
-        start_datetime=work.start_datetime,
-        end_datetime=work.end_datetime,
-        duration=work.duration,
+        item=work.item, start_datetime=work.start_datetime, is_active=work.is_active
     )
     db.add(db_work)
     db.commit()
@@ -21,7 +17,7 @@ def create_work(db: Session, work: schemas.WorkCreate):
     return db_work
 
 
-def update_work(db: Session, work: schemas.WorkCreate, work_id: int):
+def update_work(db: Session, work: schemas.WorkUpdate, work_id: int):
     db.query(models.Work).filter(models.Work.work_id == work_id).update(work.dict())
     db.commit()
     return work

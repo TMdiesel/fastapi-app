@@ -15,7 +15,10 @@ export const Data = () => {
     const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"][day];
     return `${month}/${date} (${dayOfWeek})`;
   };
-  const toTimeString = (datetime: Date): string => {
+  const toTimeString = (datetime: Date | undefined): string => {
+    if (datetime === undefined) {
+      return "";
+    }
     const hour = ("0" + datetime.getHours()).slice(-2);
     const minute = ("0" + datetime.getMinutes()).slice(-2);
     return `${hour}:${minute}`;
@@ -37,6 +40,7 @@ export const Data = () => {
             <th>作業時間</th>
             <th>項目</th>
             <th>メモ</th>
+            <th>終了</th>
             <th>更新</th>
             <th>削除</th>
           </tr>
@@ -51,6 +55,13 @@ export const Data = () => {
                 <td>{work.duration}</td>
                 <td>{work.item}</td>
                 <td>{work.memo}</td>
+                <td>
+                  {work.isActive && (
+                    <button className="button is-info is-hoverrd is-small">
+                      終了
+                    </button>
+                  )}
+                </td>
                 <td>
                   <button className="button is-success is-hoverrd is-small">
                     更新

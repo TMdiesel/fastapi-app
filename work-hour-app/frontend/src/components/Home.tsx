@@ -1,4 +1,10 @@
+import React from "react";
+import { useState } from "react";
+import { createWork } from "../apis";
+
 export const Home = () => {
+  const [item, setItem] = useState<string>("");
+
   const getTime = (): string => {
     const now = new Date();
     const month = now.getMonth() + 1;
@@ -10,9 +16,28 @@ export const Home = () => {
     return `${month}/${date} (${dayOfWeek}) ${hour}:${minute}`;
   };
 
+  const handleItemChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setItem(event.target.value);
+  };
+  const handleSubmit = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
+    createWork({
+      item: item,
+      isActive: true,
+      startDatetime: new Date(),
+    });
+  };
+
   return (
     <div>
       <div className="is-size-1 has-text-centered">{getTime()}</div>
+      <input type="text" value={item} onChange={handleItemChange}></input>
+      <button className="button is-info is-hoverrd" onClick={handleSubmit}>
+        開始
+      </button>
     </div>
   );
 };

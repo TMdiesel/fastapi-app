@@ -16,58 +16,52 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Work
+ * @interface WorkUpdate
  */
-export interface Work {
+export interface WorkUpdate {
     /**
      * 
      * @type {string}
-     * @memberof Work
+     * @memberof WorkUpdate
      */
     item: string;
     /**
      * 
      * @type {Date}
-     * @memberof Work
+     * @memberof WorkUpdate
      */
     startDatetime: Date;
     /**
      * 
      * @type {boolean}
-     * @memberof Work
+     * @memberof WorkUpdate
      */
     isActive: boolean;
     /**
      * 
      * @type {string}
-     * @memberof Work
+     * @memberof WorkUpdate
      */
     memo?: string;
     /**
      * 
      * @type {Date}
-     * @memberof Work
+     * @memberof WorkUpdate
      */
     endDatetime?: Date;
     /**
      * 
      * @type {number}
-     * @memberof Work
+     * @memberof WorkUpdate
      */
     duration?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Work
-     */
-    workId: number;
 }
 
-export function WorkFromJSON(json: any): Work {
-    return WorkFromJSONTyped(json, false);
+export function WorkUpdateFromJSON(json: any): WorkUpdate {
+    return WorkUpdateFromJSONTyped(json, false);
 }
 
-export function WorkFromJSONTyped(json: any, ignoreDiscriminator: boolean): Work {
+export function WorkUpdateFromJSONTyped(json: any, ignoreDiscriminator: boolean): WorkUpdate {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -79,11 +73,10 @@ export function WorkFromJSONTyped(json: any, ignoreDiscriminator: boolean): Work
         'memo': !exists(json, 'memo') ? undefined : json['memo'],
         'endDatetime': !exists(json, 'end_datetime') ? undefined : (new Date(json['end_datetime'])),
         'duration': !exists(json, 'duration') ? undefined : json['duration'],
-        'workId': json['work_id'],
     };
 }
 
-export function WorkToJSON(value?: Work | null): any {
+export function WorkUpdateToJSON(value?: WorkUpdate | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -98,7 +91,6 @@ export function WorkToJSON(value?: Work | null): any {
         'memo': value.memo,
         'end_datetime': value.endDatetime === undefined ? undefined : (value.endDatetime.toISOString()),
         'duration': value.duration,
-        'work_id': value.workId,
     };
 }
 

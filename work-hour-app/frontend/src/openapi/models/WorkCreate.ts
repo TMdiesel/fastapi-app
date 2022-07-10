@@ -27,28 +27,16 @@ export interface WorkCreate {
     item: string;
     /**
      * 
-     * @type {string}
-     * @memberof WorkCreate
-     */
-    memo: string;
-    /**
-     * 
      * @type {Date}
      * @memberof WorkCreate
      */
     startDatetime: Date;
     /**
      * 
-     * @type {Date}
+     * @type {boolean}
      * @memberof WorkCreate
      */
-    endDatetime: Date;
-    /**
-     * 
-     * @type {number}
-     * @memberof WorkCreate
-     */
-    duration: number;
+    isActive: boolean;
 }
 
 export function WorkCreateFromJSON(json: any): WorkCreate {
@@ -62,10 +50,8 @@ export function WorkCreateFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'item': json['item'],
-        'memo': json['memo'],
         'startDatetime': (new Date(json['start_datetime'])),
-        'endDatetime': (new Date(json['end_datetime'])),
-        'duration': json['duration'],
+        'isActive': json['is_active'],
     };
 }
 
@@ -79,10 +65,8 @@ export function WorkCreateToJSON(value?: WorkCreate | null): any {
     return {
         
         'item': value.item,
-        'memo': value.memo,
         'start_datetime': (value.startDatetime.toISOString()),
-        'end_datetime': (value.endDatetime.toISOString()),
-        'duration': value.duration,
+        'is_active': value.isActive,
     };
 }
 

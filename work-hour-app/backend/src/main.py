@@ -3,7 +3,9 @@ from typing import List
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-import schemas, models, crud
+import schemas
+import models
+import crud
 from database import engine, SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -45,9 +47,9 @@ async def create_work(work: schemas.WorkCreate, db: Session = Depends(get_db)):
     return crud.create_work(db, work)
 
 
-@app.put("/work/{work_id}", response_model=schemas.WorkCreate)
+@app.put("/work/{work_id}", response_model=schemas.WorkUpdate)
 async def update_work(
-    work_id: int, work: schemas.WorkCreate, db: Session = Depends(get_db)
+    work_id: int, work: schemas.WorkUpdate, db: Session = Depends(get_db)
 ):
     return crud.update_work(db, work, work_id)
 

@@ -24,6 +24,9 @@ import {
     WorkCreate,
     WorkCreateFromJSON,
     WorkCreateToJSON,
+    WorkUpdate,
+    WorkUpdateFromJSON,
+    WorkUpdateToJSON,
 } from '../models';
 
 export interface CreateWorkWorkPostRequest {
@@ -41,7 +44,7 @@ export interface ReadWorksWorkGetRequest {
 
 export interface UpdateWorkWorkWorkIdPutRequest {
     workId: number;
-    workCreate: WorkCreate;
+    workUpdate: WorkUpdate;
 }
 
 /**
@@ -175,13 +178,13 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Update Work
      */
-    async updateWorkWorkWorkIdPutRaw(requestParameters: UpdateWorkWorkWorkIdPutRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<WorkCreate>> {
+    async updateWorkWorkWorkIdPutRaw(requestParameters: UpdateWorkWorkWorkIdPutRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<WorkUpdate>> {
         if (requestParameters.workId === null || requestParameters.workId === undefined) {
             throw new runtime.RequiredError('workId','Required parameter requestParameters.workId was null or undefined when calling updateWorkWorkWorkIdPut.');
         }
 
-        if (requestParameters.workCreate === null || requestParameters.workCreate === undefined) {
-            throw new runtime.RequiredError('workCreate','Required parameter requestParameters.workCreate was null or undefined when calling updateWorkWorkWorkIdPut.');
+        if (requestParameters.workUpdate === null || requestParameters.workUpdate === undefined) {
+            throw new runtime.RequiredError('workUpdate','Required parameter requestParameters.workUpdate was null or undefined when calling updateWorkWorkWorkIdPut.');
         }
 
         const queryParameters: any = {};
@@ -195,16 +198,16 @@ export class DefaultApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: WorkCreateToJSON(requestParameters.workCreate),
+            body: WorkUpdateToJSON(requestParameters.workUpdate),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => WorkCreateFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => WorkUpdateFromJSON(jsonValue));
     }
 
     /**
      * Update Work
      */
-    async updateWorkWorkWorkIdPut(requestParameters: UpdateWorkWorkWorkIdPutRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<WorkCreate> {
+    async updateWorkWorkWorkIdPut(requestParameters: UpdateWorkWorkWorkIdPutRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<WorkUpdate> {
         const response = await this.updateWorkWorkWorkIdPutRaw(requestParameters, initOverrides);
         return await response.value();
     }
