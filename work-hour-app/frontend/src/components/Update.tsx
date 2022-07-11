@@ -5,7 +5,7 @@ import { WorkUpdate } from "../openapi";
 
 export const Update = () => {
   const { workId } = useParams();
-  const [workUpdate, setWorkUpdate] = useState<WorkUpdate>();
+  const [workUpdate, setWorkUpdate] = useState<WorkUpdate>({} as WorkUpdate);
 
   useEffect(() => {
     readWork(Number(workId)).then((responses) => {
@@ -15,10 +15,13 @@ export const Update = () => {
   }, [workId]);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log(event.target.value);
-    //setWorkUpdate((previous) => ({ ...previous }));
+    setWorkUpdate((previous) => ({ ...previous, memo: event.target.value }));
   };
-  const handleSubmit = () => {};
+  const handleSubmit = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
+    updateWork(Number(workId), workUpdate);
+  };
 
   return (
     <div>
@@ -26,7 +29,7 @@ export const Update = () => {
         className="input"
         style={{ width: "33%" }}
         type="text"
-        value={workUpdate?.memo}
+        value={workUpdate?.memo || ""}
         onChange={handleOnChange}
       ></input>
       <Link to="/data">
