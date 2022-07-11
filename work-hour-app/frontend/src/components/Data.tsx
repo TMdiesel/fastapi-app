@@ -1,6 +1,7 @@
 import { readWorks, deleteWork } from "../apis";
 import { useState, useEffect } from "react";
 import { Work } from "../openapi";
+import { Link } from "react-router-dom";
 
 export const Data = () => {
   const [works, setWorks] = useState<Work[]>([]);
@@ -63,9 +64,11 @@ export const Data = () => {
                   )}
                 </td>
                 <td>
-                  <button className="button is-success is-hoverrd is-small">
-                    更新
-                  </button>
+                  <Link to={`/update/${work.workId}`}>
+                    <button className="button is-success is-hoverrd is-small">
+                      更新
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button

@@ -17,6 +17,10 @@ def create_work(db: Session, work: schemas.WorkCreate):
     return db_work
 
 
+def read_work(db: Session, work_id: int):
+    return db.query(models.Work).filter(models.Work.work_id == work_id).first()
+
+
 def update_work(db: Session, work: schemas.WorkUpdate, work_id: int):
     db.query(models.Work).filter(models.Work.work_id == work_id).update(work.dict())
     db.commit()

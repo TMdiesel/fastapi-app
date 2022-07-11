@@ -5,6 +5,7 @@ import { Home } from "./components/Home";
 import { Data } from "./components/Data";
 import { Visualization } from "./components/Visualization";
 import { Setting } from "./components/Setting";
+import { Update } from "./components/Update";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path={`/data`} element={<Data></Data>} />
           <Route path={`/vis`} element={<Visualization></Visualization>} />
           <Route path={`/setting`} element={<Setting></Setting>} />
+          <Route path={`/update/:workId`} element={<Update></Update>} />
         </Routes>
       </BrowserRouter>
     </div>

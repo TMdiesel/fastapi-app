@@ -47,6 +47,11 @@ async def create_work(work: schemas.WorkCreate, db: Session = Depends(get_db)):
     return crud.create_work(db, work)
 
 
+@app.get("/work/{work_id}", response_model=schemas.Work)
+async def read_work(work_id: int, db: Session = Depends(get_db)):
+    return crud.read_work(db, work_id)
+
+
 @app.put("/work/{work_id}", response_model=schemas.WorkUpdate)
 async def update_work(
     work_id: int, work: schemas.WorkUpdate, db: Session = Depends(get_db)

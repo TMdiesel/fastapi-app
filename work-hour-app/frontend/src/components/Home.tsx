@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { createWork } from "../apis";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [item, setItem] = useState<string>("item1");
@@ -44,18 +45,12 @@ export const Home = () => {
           <option value="item1">item1</option>
           <option value="item2">item2</option>
         </select>
-        {/*
-        <input
-          className="input"
-          style={{ width: "33%" }}
-          type="text"
-          value={item}
-          onChange={handleItemChange}
-        ></input>
-        */}
-        <button className="button is-info is-hoverrd" onClick={handleSubmit}>
-          開始
-        </button>
+
+        <Link to="/data">
+          <button className="button is-info is-hoverrd" onClick={handleSubmit}>
+            開始
+          </button>
+        </Link>
       </div>
     </div>
   );

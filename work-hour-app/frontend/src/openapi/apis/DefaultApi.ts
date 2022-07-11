@@ -37,6 +37,10 @@ export interface DeleteWorkWorkWorkIdDeleteRequest {
     workId: number;
 }
 
+export interface ReadWorkWorkWorkIdGetRequest {
+    workId: number;
+}
+
 export interface ReadWorksWorkGetRequest {
     skip?: number;
     limit?: number;
@@ -138,6 +142,36 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async indexGet(initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<any> {
         const response = await this.indexGetRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Read Work
+     */
+    async readWorkWorkWorkIdGetRaw(requestParameters: ReadWorkWorkWorkIdGetRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<runtime.ApiResponse<Work>> {
+        if (requestParameters.workId === null || requestParameters.workId === undefined) {
+            throw new runtime.RequiredError('workId','Required parameter requestParameters.workId was null or undefined when calling readWorkWorkWorkIdGet.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/work/{work_id}`.replace(`{${"work_id"}}`, encodeURIComponent(String(requestParameters.workId))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => WorkFromJSON(jsonValue));
+    }
+
+    /**
+     * Read Work
+     */
+    async readWorkWorkWorkIdGet(requestParameters: ReadWorkWorkWorkIdGetRequest, initOverrides?: RequestInit | runtime.InitOverideFunction): Promise<Work> {
+        const response = await this.readWorkWorkWorkIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
