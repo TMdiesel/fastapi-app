@@ -31,7 +31,7 @@ export const Data = () => {
   };
 
   return (
-    <div>
+    <div className="box">
       <table className="table">
         <thead>
           <tr>

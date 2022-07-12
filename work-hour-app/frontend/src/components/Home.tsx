@@ -34,9 +34,9 @@ export const Home = () => {
   };
 
   return (
-    <div>
-      <div className="is-size-1 has-text-centered">{getTime()}</div>
-      <div className="columns is-centerd">
+    <div className="box">
+      <div className="is-size-1">{getTime()}</div>
+      <div className="columns is-centerd mt-5">
         <select
           className="select"
           onChange={handleItemChange}
