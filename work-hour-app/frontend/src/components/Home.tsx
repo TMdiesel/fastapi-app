@@ -26,10 +26,11 @@ export const Home = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     if (!item) return;
+    const now = new Date(Date.now() + 9 * 60 * 60 * 1000);
     createWork({
       item: item,
       isActive: true,
-      startDatetime: new Date(),
+      startDatetime: now,
     });
   };
 

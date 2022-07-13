@@ -29,6 +29,12 @@ export const Data = () => {
       readWorks().then((responses) => setWorks(responses))
     );
   };
+  const toHHMM = (totalMinute: number | undefined) => {
+    if (totalMinute === undefined) return;
+    const minute = ("0" + (totalMinute % 60)).slice(-2);
+    const hour = Math.floor(totalMinute / 60);
+    return `${hour}:${minute}`;
+  };
 
   return (
     <div className="box">
@@ -41,8 +47,7 @@ export const Data = () => {
             <th>作業時間</th>
             <th>項目</th>
             <th>メモ</th>
-            <th>終了</th>
-            <th>更新</th>
+            <th>更新/終了</th>
             <th>削除</th>
           </tr>
         </thead>
@@ -53,27 +58,24 @@ export const Data = () => {
                 <td>{toDateString(work.startDatetime)}</td>
                 <td>{toTimeString(work.startDatetime)}</td>
                 <td>{toTimeString(work.endDatetime)}</td>
-                <td>{work.duration}</td>
+                <td>{toHHMM(work.duration)}</td>
                 <td>{work.item}</td>
                 <td>{work.memo}</td>
                 <td>
-                  {work.isActive && (
-                    <button className="button is-info is-hoverrd is-small">
-                      終了
-                    </button>
-                  )}
-                </td>
-                <td>
                   <Link to={`/update/${work.workId}`}>
-                    <button className="button is-success is-hoverrd is-small">
-                      更新
+                    <button
+                      className={`button ${
+                        work.isActive ? `is-danger` : `is-success`
+                      } is-hoverrd is-small`}
+                    >
+                      {work.isActive ? "終了" : "更新"}
                     </button>
                   </Link>
                 </td>
                 <td>
                   <button
                     onClick={() => onClickDelete(work.workId)}
-                    className="button is-danger is-hoverrd is-small"
+                    className="button is-info is-hoverrd is-small"
                   >
                     削除
                   </button>

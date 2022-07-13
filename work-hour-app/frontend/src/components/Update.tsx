@@ -36,16 +36,25 @@ export const Update = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     const duration = workUpdate.endDatetime
-      ? (workUpdate.endDatetime.getTime() -
-          workUpdate.startDatetime.getTime()) /
-        60 /
-        1000
+      ? Math.floor(
+          (workUpdate.endDatetime.getTime() -
+            workUpdate.startDatetime.getTime()) /
+            60 /
+            1000
+        )
       : 0;
-    setWorkUpdate((previous) => ({
-      ...previous,
+    updateWork(Number(workId), {
+      ...workUpdate,
       duration: duration,
-    }));
-    updateWork(Number(workId), workUpdate);
+      startDatetime: new Date(
+        new Date(workUpdate.startDatetime).getTime() + 9 * 60 * 60 * 1000
+      ),
+      endDatetime: new Date(
+        new Date(workUpdate?.endDatetime || new Date()).getTime() +
+          9 * 60 * 60 * 1000
+      ),
+      isActive: false,
+    });
   };
   const toISOStringMin = (
     datetime: Date | string | undefined
