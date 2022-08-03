@@ -11,6 +11,7 @@ React, FastAPI を用いた web アプリです。
 - [todo-ts-app](todo-app): React(TypeScript)による Todo アプリです。
 - [netflix-app](netflix-app): React(TypeScript)による Netflix クローンです。
 - [simple-app](simple-app): under construction
+- [work-hour-app](work-hour-app): React(TypeScript), FastAPI による作業時間管理アプリです。
 
 ## 実行環境
 

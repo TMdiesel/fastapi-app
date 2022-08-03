@@ -43,18 +43,39 @@ export const Update = () => {
             1000
         )
       : 0;
-    updateWork(Number(workId), {
-      ...workUpdate,
-      duration: duration,
-      startDatetime: new Date(
-        new Date(workUpdate.startDatetime).getTime() + 9 * 60 * 60 * 1000
-      ),
-      endDatetime: new Date(
-        new Date(workUpdate?.endDatetime || new Date()).getTime() +
-          9 * 60 * 60 * 1000
-      ),
-      isActive: false,
+    console.log(duration);
+    setWorkUpdate((previous) => {
+      console.log(previous);
+      return {
+        ...previous,
+        duration: duration,
+        startDatetime: new Date(
+          new Date(workUpdate.startDatetime).getTime() + 9 * 60 * 60 * 1000
+        ),
+        endDatetime: new Date(
+          new Date(workUpdate?.endDatetime || new Date()).getTime() +
+            9 * 60 * 60 * 1000
+        ),
+        isActive: false,
+      };
     });
+    setWorkUpdate((previous) => {
+      console.log(previous);
+      updateWork(Number(workId), previous);
+      return previous;
+    });
+    //updateWork(Number(workId), {
+    //  ...workUpdate,
+    //  duration: duration,
+    //  startDatetime: new Date(
+    //    new Date(workUpdate.startDatetime).getTime() + 9 * 60 * 60 * 1000
+    //  ),
+    //  endDatetime: new Date(
+    //    new Date(workUpdate?.endDatetime || new Date()).getTime() +
+    //      9 * 60 * 60 * 1000
+    //  ),
+    //  isActive: false,
+    //});
   };
   const toISOStringMin = (
     datetime: Date | string | undefined
@@ -130,14 +151,12 @@ export const Update = () => {
       </div>
       <div className="field">
         <div className="control">
-          <Link to="/data">
-            <button
-              className="button is-success is-hoverred"
-              onClick={handleSubmit}
-            >
-              更新
-            </button>
-          </Link>
+          <button
+            className="button is-success is-hoverred"
+            onClick={handleSubmit}
+          >
+            更新
+          </button>
         </div>
       </div>
     </div>
